@@ -1,36 +1,18 @@
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 class Student {
 
     int rollNo;
     String name;
-    int marks;
 
-    Student(int rollNo, String name, int marks) {
+    Student(int rollNo, String name) {
         this.rollNo = rollNo;
         this.name = name;
-        this.marks = marks;
     }
 
-    // equals() for checking duplicates
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Student)) return false;
-
-        Student s = (Student) obj;
-        return this.rollNo == s.rollNo;
-    }
-
-    // hashCode() for HashSet
-    @Override
-    public int hashCode() {
-        return Objects.hash(rollNo);
-    }
-
-    @Override
     public String toString() {
-        return rollNo + " - " + name + " - " + marks;
+        return rollNo + " " + name;
     }
 }
 
@@ -40,21 +22,16 @@ public class StudentSetExample {
 
         Set<Student> students = new HashSet<>();
 
-        students.add(new Student(1, "Munees", 85));
-        students.add(new Student(2, "Arun", 70));
-        students.add(new Student(1, "Duplicate", 90)); // Duplicate rollNo
+        students.add(new Student(1, "Munees"));
+        students.add(new Student(2, "Arun"));
+        students.add(new Student(3, "Kumar"));
 
-        System.out.println("Students:");
-        students.forEach(System.out::println);
+        System.out.println("Students in HashSet:");
 
-        // contains()
-        System.out.println("Contains roll 1? " +
-            students.contains(new Student(1, "Test", 50)));
+        for (Student s : students) {
+            System.out.println(s);
+        }
 
-        // remove()
-        students.remove(new Student(2, "Arun", 70));
-
-        System.out.println("After remove:");
-        students.forEach(System.out::println);
+        System.out.println("Total Students: " + students.size());
     }
 }
